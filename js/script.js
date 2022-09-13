@@ -1,5 +1,11 @@
 "use strict";
 
+const templates = {
+  articleLink: Handlebars.compile(
+    document.querySelector("#template-article-link").innerHTML
+  ),
+};
+
 function titleClickHandler(event) {
   event.preventDefault();
   const clickedElement = this;
@@ -77,12 +83,9 @@ function generateTitleLinks(customSelector = "") {
 
     /* create HTML of the link */
 
-    const linkHTML =
-      '<li><a href="#' +
-      articleId +
-      '"><span>' +
-      articleTitle +
-      "</span></a></li>";
+    const linkHTMLData = { id: articleId, title: articleTitle };
+    const linkHTML = templates.articleLink(linkHTMLData);
+
     //console.log(linkHTML);
 
     /* insert link into titleList */
@@ -241,6 +244,8 @@ function generateAuthors() {
     /* find authors wrapper */
     const authorList = article.querySelector(optArticleAuthorSelector);
     /* make html variable with empty string */
+
+    let html = "";
 
     /* get authors from data-author attribute */
     const authorName = article.getAttribute("data-author");
