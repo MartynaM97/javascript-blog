@@ -100,7 +100,7 @@ function generateTitleLinks(customSelector = "") {
 generateTitleLinks();
 
 function calculateTagsParams(tags) {
-  const params = { max: 0, min: 999999 };
+  const params = { max: 0, min: 1 };
 
   for (let tag in tags) {
     if (tags[tag] > params.max) {
